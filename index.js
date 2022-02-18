@@ -63,21 +63,26 @@ const teamManager = managerData => {
             message: "What would you like to do next?",
             choices: ['Add Engineer', 'Add Intern', 'Finish'],
             validate: addMember => {
-                if ('Add Engineer') {
-                    addEngineer();
-                } 
-                if ('Add Intern') {
-                    addIntern();
-                } 
-                if ('Finish') {
-                    populateTeam();
+                if ('Add Engineer' || 'Add Intern' || 'Finish') {
+                   return true;
                 } else {
-                    console.log("Please select an option!");
                     return false;
                 }
             }
         },
     ])
+    .then((props) => {
+        console.log(props);
+        if(props.add === 'Add Engineer') {
+            addEngineer();
+        }
+        if(props.add === 'Add Intern') {
+            addIntern();
+        }
+        if(props.add === 'Finish') {
+            populatePage();
+        }
+    })
 }
 
 const addEngineer = engineerData  => {
@@ -88,8 +93,8 @@ const addEngineer = engineerData  => {
             type: 'input',
             name: 'name',
             message: "What is the Engineer's name?",
-            validate: managerNameInput => {
-                if (managerNameInput) {
+            validate: engineerNameInput => {
+                if (engineerNameInput) {
                     return true;
                 } else {
                     console.log("Please enter the Engineer's name!");
@@ -99,7 +104,7 @@ const addEngineer = engineerData  => {
         },
         {
             type: 'input',
-            name: 'name',
+            name: 'id',
             message: "What is the Engineer's employee ID?",
             validate: engineerID => {
                 if (engineerID) {
@@ -112,7 +117,7 @@ const addEngineer = engineerData  => {
         },
         {
             type: 'input',
-            name: 'name',
+            name: 'email',
             message: "What is the Engineer's email adress?",
             validate: engineerEmail => {
                 if (engineerEmail) {
@@ -125,10 +130,30 @@ const addEngineer = engineerData  => {
         },
         {
             type: 'input',
-            name: 'name',
+            name: 'github',
             message: "What is the Engineer's GitHub username?",
             validate: engineerGithub => {
                 if (engineerGithub) {
+                    return true;
+                } else {
+                    console.log("Please enter the Engineer's name!");
+                    return false;
+                }
+            }
+        },
+    ])
+}
+
+const addIntern = internData  => {
+    internData = []
+
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: "What is the Engineer's name?",
+            validate: engineerNameInput => {
+                if (engineerNameInput) {
                     return true;
                 } else {
                     console.log("Please enter the Engineer's name!");
