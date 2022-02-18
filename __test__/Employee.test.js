@@ -16,7 +16,7 @@ it('creates an employee object'), (name) => {
 };
 
 it('gets Employees info as an object'), () => {
-    const employee = new Employee('John');
+    // const employee = new Employee('John');
 
     expect(employee.getName()).toBe('John');
     expect(employee.getId()).toBe('1');
