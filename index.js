@@ -1,5 +1,9 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Employee = require('./lib/Employee');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
+const populatePage = require('./lib/populatePage');
 
 const teamManager = managerData => {
     managerData = [];
@@ -75,12 +79,14 @@ const teamManager = managerData => {
         console.log(props);
         if(props.add === 'Add Engineer') {
             addEngineer();
+            return populatePage(managerData);
         }
         if(props.add === 'Add Intern') {
             addIntern();
+            return populatePage(managerData);
         }
         if(props.add === 'Finish') {
-            populatePage();
+            return populatePage(managerData);
         }
     })
 }
@@ -141,7 +147,34 @@ const addEngineer = engineerData  => {
                 }
             }
         },
+        {
+            type: 'list',
+            name: 'add',
+            message: "What would you like to do next?",
+            choices: ['Add Engineer', 'Add Intern', 'Finish'],
+            validate: addMember => {
+                if ('Add Engineer' || 'Add Intern' || 'Finish') {
+                   return true;
+                } else {
+                    return false;
+                }
+            }
+        }
     ])
+    .then((props) => {
+        console.log(props);
+        if(props.add === 'Add Engineer') {
+            addEngineer();
+            return populatePage(engineerData);
+        }
+        if(props.add === 'Add Intern') {
+            addIntern();
+            return populatePage(engineerData);
+        }
+        if(props.add === 'Finish') {
+            return populatePage(managerData);
+        }
+    })
 }
 
 const addIntern = internData  => {
@@ -151,17 +184,83 @@ const addIntern = internData  => {
         {
             type: 'input',
             name: 'name',
-            message: "What is the Engineer's name?",
-            validate: engineerNameInput => {
-                if (engineerNameInput) {
+            message: "What is the Intern's name?",
+            validate: internNameInput => {
+                if (internNameInput) {
                     return true;
                 } else {
-                    console.log("Please enter the Engineer's name!");
+                    console.log("Please enter the Intern's name!");
                     return false;
                 }
             }
         },
+        {
+            type: 'input',
+            name: 'id',
+            message: "What is the Intern's employee ID?",
+            validate: internIdInput => {
+                if (internIdInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the Intern's employee ID number!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'email',
+            message: "What is the Intern's email address?",
+            validate: internEmailInput => {
+                if (internEmailInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the Intern's email address!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'school',
+            message: "What school does this Intern attend?",
+            validate: internNameInput => {
+                if (internNameInput) {
+                    return true;
+                } else {
+                    console.log("Please enter the Intern's school!");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'list',
+            name: 'add',
+            message: "What would you like to do next?",
+            choices: ['Add Engineer', 'Add Intern', 'Finish'],
+            validate: addMember => {
+                if ('Add Engineer' || 'Add Intern' || 'Finish') {
+                   return true;
+                } else {
+                    return false;
+                }
+            }
+        }
     ])
+    .then((props) => {
+        console.log(props);
+        if(props.add === 'Add Engineer') {
+            addEngineer();
+            return populatePage(internData);
+        }
+        if(props.add === 'Add Intern') {
+            addIntern();
+            return populatePage(internData);
+        }
+        if(props.add === 'Finish') {
+            return populatePage(internData);
+        }
+    })
 }
 
 teamManager();
