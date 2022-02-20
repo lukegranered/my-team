@@ -263,4 +263,25 @@ const addIntern = internData  => {
     })
 }
 
-teamManager();
+const writeToFile = fileContent => {
+    return new Promise((resolve, reject) => {
+        fs.writeFile('./dist/myteam.html', fileContent, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'Team Page created!',
+            });
+        });
+    });
+}
+
+teamManager()
+    .then((managerData, engineerData, internData)=> {
+        return populatePage(managerData, engineerData, internData)
+    })
+    .then(teamPage => {
+        return writeToFile(teamPage);
+    })
