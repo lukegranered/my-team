@@ -4,7 +4,9 @@ const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const populatePage = require('./lib/populatePage');
+const Manager = require('./lib/Manager');
 
+const data = [];
 const teamManager = managerData => {
     managerData = [];
 
@@ -75,18 +77,17 @@ const teamManager = managerData => {
             }
         },
     ])
-    .then((props) => {
-        console.log(props);
-        if(props.add === 'Add Engineer') {
+    .then((answers) => {
+        const newTeamManager = new Manager(answers);
+        data.push(newTeamManager);
+        if(answers.add === 'Add Engineer') {
             addEngineer();
-            return populatePage(managerData);
         }
-        if(props.add === 'Add Intern') {
+        if(answers.add === 'Add Intern') {
             addIntern();
-            return populatePage(managerData);
         }
-        if(props.add === 'Finish') {
-            return populatePage(managerData);
+        if(answers.add === 'Finish') {
+            return data;
         }
     })
 }
@@ -161,18 +162,18 @@ const addEngineer = engineerData  => {
             }
         }
     ])
-    .then((props) => {
-        console.log(props);
-        if(props.add === 'Add Engineer') {
+    .then((answers) => {
+        const newEngineer = new Engineer(answers);
+        data.push(newEngineer);
+
+        if(answers.add === 'Add Engineer') {
             addEngineer();
-            return populatePage(engineerData);
         }
-        if(props.add === 'Add Intern') {
+        if(answers.add === 'Add Intern') {
             addIntern();
-            return populatePage(engineerData);
         }
-        if(props.add === 'Finish') {
-            return populatePage(managerData);
+        if(answers.add === 'Finish') {
+            return data;
         }
     })
 }
@@ -247,18 +248,17 @@ const addIntern = internData  => {
             }
         }
     ])
-    .then((props) => {
-        console.log(props);
-        if(props.add === 'Add Engineer') {
+    .then((answers) => {
+        const newIntern = new Intern(answers);
+        data.push(newIntern);
+        if(answers.add === 'Add Engineer') {
             addEngineer();
-            return populatePage(internData);
         }
-        if(props.add === 'Add Intern') {
+        if(answers.add === 'Add Intern') {
             addIntern();
-            return populatePage(internData);
         }
-        if(props.add === 'Finish') {
-            return populatePage(internData);
+        if(answers.add === 'Finish') {
+            return data;
         }
     })
 }
@@ -279,8 +279,8 @@ const writeToFile = fileContent => {
 }
 
 teamManager()
-    .then((managerData, engineerData, internData)=> {
-        return populatePage(managerData, engineerData, internData)
+    .then(data => {
+        return populatePage(data)
     })
     .then(teamPage => {
         return writeToFile(teamPage);

@@ -1,11 +1,4 @@
-const Employee = require('../lib/Employee');
-const Engineer = require('../lib/Engineer');
-const Intern = require('../lib/Intern');
-const Manager = require('../lib/Manager');
 
-function populatePage(data) {
-console.log(data);
-    return `
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -19,9 +12,6 @@ console.log(data);
         My Team
     </header>
     <body>
-        ${data.filter(employee => employee.type === "Team Manager").map(employee => employee.name)}
+        
     </body>
-    </html>`
-}
-
-module.exports = populatePage;
+    </html>
