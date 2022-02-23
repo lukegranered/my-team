@@ -54,8 +54,8 @@ const teamManager = managerData => {
             type: 'input',
             name: 'officenumber',
             message: "What is the Team Manager's office number?",
-            validate: managerNameInput => {
-                if (managerNameInput) {
+            validate: managerOfficeNumber => {
+                if (managerOfficeNumber) {
                     return true;
                 } else {
                     console.log("Please enter the Team Manager's office number!");
