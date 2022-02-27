@@ -16,8 +16,9 @@ it('creates an employee object', () => {
 });
 
 it('returns data describing object', () => {
+    const employee = new Employee;
 
-    expect(this.name);
+    expect(getName()).toBe('John');
     expect(this.id);
     expect(this.email);
     expect('Employee');
