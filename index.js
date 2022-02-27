@@ -265,32 +265,8 @@ const init = () => {
     teamManager();
 }
 
-// const writeToFile = data => {
-//     return new Promise((resolve, reject) => {
-//         fs.writeFile('./dist/myteam.html', data, err => {
-//             if (err) {
-//                 reject(err);
-//                 return;
-//             }
-//             resolve({
-//                 ok: true,
-//                 message: 'Team Page created!',
-//             });
-//         });
-//     });
-// }
-
-
-
 init()
-    // .then(data => {
-    //     return populatePage(data);
-    // })
-    // .then(teamPage => {
-    //     console.log(JSON.stringify(teamPage));
-    //     writeToFile(teamPage);
-    // })
-        
+
   
     
 
