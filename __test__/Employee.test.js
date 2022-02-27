@@ -15,11 +15,3 @@ it('creates an employee object', () => {
     expect(employee.email).toBe('john@john.com');
 });
 
-it('returns data describing object', () => {
-    const employee = new Employee;
-
-    expect(getName()).toBe('John');
-    expect(this.id);
-    expect(this.email);
-    expect('Employee');
-});
