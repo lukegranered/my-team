@@ -11,14 +11,5 @@ it('creates an Engineer object', () => {
     expect(engineer.name).toBe('John');
     expect(engineer.id).toEqual('1');
     expect(engineer.email).toBe('john@john.com');
-    expect(engineer.github).toBe('lukegranered');
+    expect(engineer.github).toBe('johnsmith');
 })
-
-it('returns data describing object', () => {
-
-    expect(getName()).toBe(this.name);
-    expect(this.id);
-    expect(this.email);
-    expect(this.github);
-    expect('Engineer');
-});

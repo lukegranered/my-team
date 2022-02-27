@@ -163,7 +163,6 @@ const init = () => {
         ])
         .then((answers) => {
             const newEngineer = new Engineer(answers);
-            console.log(newEngineer);
             data.push(newEngineer);
 
             if(answers.add === 'Add Engineer') {
